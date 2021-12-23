@@ -9,6 +9,9 @@ import{
   Route,
   Navlink
 } from "react-router-dom";
+import { AuthProvider } from './Auth';
+
+import Login from './components/pages/loginPage/index'
 
 //import posts from './components/Posts/index'
 //import Button from './components/buttons'
@@ -45,6 +48,7 @@ useEffect (() => {
   getPosts();
 }, []);
 
+/*
 if (loading) {
   return <h1>Loading...</h1>
 }
@@ -59,18 +63,23 @@ return(
         </div>
       ))}
   </div>);
+*/
 
 console.log(posts);
 
     return(
+      <AuthProvider>
         <Router>
           <Switch>
             <Route exact path="/homepage">
             </Route>
             <Route exact path="/me">
             </Route>
+            <Route exact path="/login">
+            </Route>
           </Switch>
         </Router>
+        </AuthProvider>
       );
     
 };
