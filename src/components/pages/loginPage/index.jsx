@@ -3,7 +3,7 @@ import { useState } from "react";
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { firebaseAuth } from "../../../firebase";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../../Auth";
+
 
 const Login = ({history}) => {
 const [registerEmail, setRegisterEmail] = useState("")
@@ -45,42 +45,8 @@ const logout = async () => {
     await signOut(firebaseAuth);
 }
 
-/*
-const email = "test@email.com"
-        const password = "123456"
-
-    const handleLogin = useCallback(
-
-        
-        async event => {
-            event.preventDefault();
-            //const {email, password} = event.target.elements;
-            debugger
-            console.log(loginEmail, loginPassword)
-            try{
-                const user= await signInWithEmailAndPassword(firebaseAuth, loginEmail, loginPassword);
-                debugger
-                
-
-                /*await firebaseConfig
-                    .auth()
-                    .signInWithEmailandPassword(email.value, password.value);
-                    history.push("/"); 
-            }catch(error) {
-                alert(error);
-            }
-        },
-        [history]
-    );
-    const currentUser = useContext(AuthContext);
-
-    if (currentUser) {
-        return < Redirect to="/" />;
-    }
-*/
     return (
         <div> 
-            <Link to = "/homepage"><button>HomePage</button></Link>
             <h1>Login</h1>
             <div>
                 <label>

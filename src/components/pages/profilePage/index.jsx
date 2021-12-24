@@ -57,7 +57,6 @@ export const ProfilePage = () => {
   return(
     <div>
       <Link to = "/login"><button>Login/Sign out</button></Link>
-      <Link to = "/homepage"><button>HomePage</button></Link>
       <form>
           <input type="text"
           value={newPost}
