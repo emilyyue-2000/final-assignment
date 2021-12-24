@@ -9,11 +9,11 @@ import { firebaseAuth } from '../../../firebase';
 const auth = getAuth()
 console.log (auth.currentUser);
 
-
 export const ProfilePage = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const ref = firebase.firestore().collection("posts");
+  const [newPost, setNewPost] = useState(""); 
 
   function getPosts() {
     setLoading(true);
@@ -27,6 +27,21 @@ export const ProfilePage = () => {
     });
   }
 
+  const handleOnChange = e => {
+      setNewPost(e.target.value);
+  }
+
+  const handleOnSubmit = e =>{
+      e.preventDefault();
+    
+      if(ref) {
+        ref.add({
+            text: newPost,
+            user: "test@gmail.com",
+        })   
+       }
+    }
+
   useEffect (() => {
     getPosts();
   }, []);
@@ -37,8 +52,17 @@ export const ProfilePage = () => {
   return(
     <div>
       <Link to = "/login"><button>Login/Sign out</button></Link>
-      <Link to = "/me"></Link><button>Profile Page</button>
+      <Link to = "/homepage"><button>HomePage</button></Link>
+      <form>
+          <input type="text"
+          value={newPost}
+          onChange={handleOnChange}
+          placeholder='Type new post'>
+          </input>
+          <button onClick={handleOnSubmit}>Submit Post</button>
+      </form>
       <h1>My Posts</h1>
+      
       {
         posts.map((post) => (
           <div key = {post.user}>
