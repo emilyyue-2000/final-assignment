@@ -3,7 +3,7 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import { useEffect, useState } from 'react';
 
-import firebaseConfig from '../../firebase';
+//import firebaseConfig from '../../firebase';
 
 export const Posts = () => {
   const [posts, setPosts] = useState([]);

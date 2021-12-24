@@ -9,29 +9,55 @@ import{
   Route,
   Navlink
 } from "react-router-dom";
-import { AuthProvider } from './Auth';
 
-import Login from './components/pages/loginPage/index'
-
-//import posts from './components/Posts/index'
+import { AuthContext } from './Auth';
+//import { AuthProvider } from './Auth';
+import Login from './components/pages/loginPage/index';
+import { Posts } from './components/pages/homepage';
 //import Button from './components/buttons'
 
 const firebaseConfig = {
-    apiKey: process.env.apiKey,
-    authDomain: process.env.authDomain,
-    projectId: "final-assignment-5abc7",
-    storageBucket: process.env.storageBucket,
-    messagingSenderId: process.env.messagingSenderId,
-    appId: process.env.appId
+  apiKey: "AIzaSyCGyCh42-XpeJY4OG5sH9HgzsJ9JdUE9dM",
+  authDomain: "final-assignment-5abc7.firebaseapp.com",
+  projectId: "final-assignment-5abc7",
+  storageBucket: "final-assignment-5abc7.appspot.com",
+  messagingSenderId: "296396049185",
+  appId: "1:296396049185:web:54f3e99f4c09fc08334c60"
 };
 
 firebase.initializeApp(firebaseConfig);
+
+
 
 function App() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const ref = firebase.firestore().collection("posts");
-  
+
+/*
+const AuthProvider = ({children}) => {
+    const [currentUser, setCurrentUser] = useState(null);
+
+    useEffect(()=> {
+        firebaseConfig.auth().onAuthStateChanged(setCurrentUser);
+    }, []);
+
+    return(
+        <AuthContext.AuthProvider
+        value={{
+            currentUser
+        }}
+
+        debugger
+
+        >
+            {children}
+        </AuthContext.AuthProvider>
+    ); 
+}; */
+
+
+/*
 function getPosts() {
   setLoading(true);
   ref.onSnapshot((querySnapshot) => {
@@ -46,40 +72,25 @@ function getPosts() {
 
 useEffect (() => {
   getPosts();
-}, []);
+}, []); 
 
-/*
-if (loading) {
-  return <h1>Loading...</h1>
-}
-return(
-  <div>
-    <h1>Posts</h1>
-    {
-      posts.map((post) => (
-        <div key = {post.user}>
-          <h1>{post.user}</h1>
-          <p>{post.text}</p>
-        </div>
-      ))}
-  </div>);
 */
-
 console.log(posts);
 
     return(
-      <AuthProvider>
+
         <Router>
           <Switch>
-            <Route exact path="/homepage">
+            <Route exact path="/homepage" component={Posts}>
             </Route>
             <Route exact path="/me">
             </Route>
-            <Route exact path="/login">
+            <Route exact path="/login" component={Login}>
+              <Login/>
             </Route>
           </Switch>
         </Router>
-        </AuthProvider>
+
       );
     
 };
