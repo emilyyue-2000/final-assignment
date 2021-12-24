@@ -2,7 +2,7 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import { useEffect, useState } from 'react';
-
+import { Link } from 'react-router-dom';
 //import firebaseConfig from '../../firebase';
 
 export const Posts = () => {
@@ -31,6 +31,8 @@ export const Posts = () => {
   }
   return(
     <div>
+      <Link to = "/login"><button>Login/Sign out</button></Link>
+      <Link to = "/me"><button>Profile Page</button></Link>
       <h1>Posts</h1>
       {
         posts.map((post) => (

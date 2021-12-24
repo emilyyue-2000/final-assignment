@@ -1,16 +1,20 @@
 import React, { useCallback, useContext} from "react";
-import { withRouter, Redirect } from "react-router";
-//import firebaseConfig from "../../../firebase";
-import { AuthContext } from "../../../Auth";
 import { useState } from "react";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { firebaseAuth } from "../../../firebase";
+import { Link } from "react-router-dom";
 
 const Login = ({history}) => {
 const [registerEmail, setRegisterEmail] = useState("")
 const [registerPassword, setRegisterPassword] = useState("")
 const [loginEmail, setLoginEmail] = useState("")
 const [loginPassword, setLoginPassword] = useState("")
+
+const[user, setUser] = useState({});
+
+onAuthStateChanged (firebaseAuth, (currentUser)=>{
+    setUser(currentUser);
+})
 
 const register = async () => {
     try{
@@ -34,7 +38,7 @@ const login = async () => {
 }
 
 const logout = async () => {
-    
+    await signOut(firebaseAuth);
 }
 
 /*
@@ -106,13 +110,15 @@ const email = "test@email.com"
                     }}
                     />
                 </label>
+                <Link to ="/homepage">
                 <button onClick={login}>Log In</button>
+                </Link>
             </div>
 
             <h4>User Currently Logged In: </h4>
-            {firebaseAuth.currentUser.email}
+            {user?.email}
 
-            <button>Sign Out</button>
+            <button onClick={logout}>Sign Out</button>
         </div>
     );
 };

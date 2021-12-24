@@ -15,6 +15,7 @@ import { AuthContext } from './Auth';
 import Login from './components/pages/loginPage/index';
 import { Posts } from './components/pages/homepage';
 //import Button from './components/buttons'
+import { ProfilePage } from './components/pages/profilePage';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCGyCh42-XpeJY4OG5sH9HgzsJ9JdUE9dM",
@@ -83,7 +84,7 @@ console.log(posts);
           <Switch>
             <Route exact path="/homepage" component={Posts}>
             </Route>
-            <Route exact path="/me">
+            <Route exact path="/me" component={ProfilePage}>
             </Route>
             <Route exact path="/login" component={Login}>
               <Login/>
