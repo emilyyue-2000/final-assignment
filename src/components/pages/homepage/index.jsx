@@ -31,7 +31,8 @@ export const Posts = () => {
   }
   return(
     <div>
-      <Link to = "/login"><button>Login/Sign out</button></Link>  
+      <Link to = "/login"><button>Login/Sign out</button></Link>
+      <Link to = "/me"><button>My Profile</button></Link>  
 
       <h1>Home Page</h1>
       {

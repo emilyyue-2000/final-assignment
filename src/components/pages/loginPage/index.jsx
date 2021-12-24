@@ -3,6 +3,7 @@ import { useState } from "react";
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { firebaseAuth } from "../../../firebase";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../Auth";
 
 const Login = ({history}) => {
 const [registerEmail, setRegisterEmail] = useState("")
@@ -25,10 +26,13 @@ const register = async () => {
     }
 };
 
+
+
 const login = async () => {
 
     try{
         const user= await signInWithEmailAndPassword(firebaseAuth, loginEmail, loginPassword);
+        
         console.log(user)
         console.log (loginEmail, loginPassword)
         }catch(error){
@@ -111,9 +115,11 @@ const email = "test@email.com"
                     }}
                     />
                 </label>
-                <Link to ="/me">
-                <button onClick={login}>Log In</button>
-                </Link>
+                    
+                        <Link to ="/homepage">
+                    <button onClick={login}>Log In</button>
+                    </Link>
+                
             </div>
 
             <h4>User Currently Logged In: </h4>
