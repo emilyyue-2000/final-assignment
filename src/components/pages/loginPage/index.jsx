@@ -76,6 +76,7 @@ const email = "test@email.com"
 */
     return (
         <div> 
+            <Link to = "/homepage"><button>HomePage</button></Link>
             <h1>Login</h1>
             <div>
                 <label>
@@ -110,7 +111,7 @@ const email = "test@email.com"
                     }}
                     />
                 </label>
-                <Link to ="/homepage">
+                <Link to ="/me">
                 <button onClick={login}>Log In</button>
                 </Link>
             </div>
@@ -118,7 +119,7 @@ const email = "test@email.com"
             <h4>User Currently Logged In: </h4>
             {user?.email}
 
-            <button onClick={logout}>Sign Out</button>
+            <Link to = "homepage"><button onClick={logout}>Sign Out</button></Link>
         </div>
     );
 };

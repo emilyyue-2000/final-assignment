@@ -31,8 +31,8 @@ export const Posts = () => {
   }
   return(
     <div>
-      <Link to = "/login"><button>Login/Sign out</button></Link>
-      <Link to = "/me"><button>Profile Page</button></Link>
+      <Link to = "/login"><button>Login/Sign out</button></Link>  
+
       <h1>Home Page</h1>
       {
         posts.map((post) => (

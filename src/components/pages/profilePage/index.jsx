@@ -1,3 +1,4 @@
+import { getDefaultNormalizer } from '@testing-library/react';
 import { getAuth } from 'firebase/auth';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
@@ -15,12 +16,16 @@ export const ProfilePage = () => {
   const ref = firebase.firestore().collection("posts");
   const [newPost, setNewPost] = useState(""); 
 
+  const auth = getAuth();
+
   function getPosts() {
     setLoading(true);
-    ref.onSnapshot((querySnapshot) => {
+    ref.where('user', '==', auth.currentUser.email ).onSnapshot((querySnapshot) => {
       const items = [];
       querySnapshot.forEach((doc) => {
-        items.push(doc.data());
+          
+            items.push(doc.data());
+          
       });
       setPosts(items);
       setLoading(false);
@@ -37,7 +42,7 @@ export const ProfilePage = () => {
       if(ref) {
         ref.add({
             text: newPost,
-            user: "test@gmail.com",
+            user: auth.currentUser.email,
         })   
        }
     }
@@ -62,7 +67,6 @@ export const ProfilePage = () => {
           <button onClick={handleOnSubmit}>Submit Post</button>
       </form>
       <h1>My Posts</h1>
-      
       {
         posts.map((post) => (
           <div key = {post.user}>
